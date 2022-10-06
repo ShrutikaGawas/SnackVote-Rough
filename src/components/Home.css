@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;700;900&family=Raleway:wght@300;400;500&display=swap");
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 4%;
+}
+
+.text-container {
+  width: 600px;
+  padding: 50px;
+}
+
+.heading {
+  font-family: "Raleway", sans-serif;
+  font-size: 70px;
+  font-weight: 900;
+  line-height: 82.18px;
+}
+
+p {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+  color: #616161;
+}
+
+.image-container img {
+  width: 600px;
+  padding: 40px 10%;
+}
+
+@media screen and (max-width: 950px) {
+  .flex-container {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .text-container{
+    width: 80vw;
+    padding: 0px;
+  }
+
+  .heading {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 47px;
+    text-align: center;
+  }
+
+  .image-container {
+    padding: 0;
+  }
+
+  .image-container img {
+    width: 350px;
+    height: 350px;
+    padding: 0;
+
+  }
+
+  p {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;
+    color: #616161;
+
+  }
+}

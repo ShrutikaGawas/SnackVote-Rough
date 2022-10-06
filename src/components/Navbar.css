@@ -1,0 +1,206 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;700;900&family=Raleway:wght@300;400;500&display=swap");
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5%;
+}
+
+.nav-link {
+  margin: auto;
+  font-family: "Montserrat", sans-serif;
+  color: black;
+  font-weight: 400;
+}
+
+.active {
+  font-weight: 600;
+  color: #80CC28;
+}
+
+.nav-logo {
+  padding-top: 15px;
+  padding-left: 60px;
+}
+
+a:hover {
+  color: #80CC28;
+}
+
+
+
+/*New styles*/
+a {
+  text-decoration: none;
+  color: black;
+}
+li {
+  list-style: none;
+  font-family: 'Montserrat', sans-serif;
+}
+/*Início das configurações da header*/
+header {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  font-family: sans-serif;
+}
+.brand {
+  width: auto;
+  height: 100%;
+  float: left;
+  margin: 10px 0px;
+  padding: 14px 40px;
+}
+.menu {
+  width: 70%;
+  height: 100%;
+  float: right;
+  display: flex;
+  margin: 10px 0px;
+  padding: 14px 40px;
+
+}
+
+.menu ul {
+  width: 100%;
+  height: inherit;
+  /* padding: 14px; */
+  margin: 15px 0px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+}
+
+.menu ul a {
+  width: 40%;
+  height: inherit;
+  display: inline-block;
+}
+ul:first-child{
+  margin-left: auto;
+}
+
+.profile {
+  flex-direction: row-reverse;
+  padding: 9px !important;
+}
+
+.profile img {
+  width: 40px;
+  height: 43px;
+  margin: -13px;
+  margin-right: 13px;
+  object-fit: cover;
+  border-radius: 500px;
+}
+
+#menuToggle {
+  display: none;
+}
+
+.menu-icon {
+  display: none;
+}
+.Login-Button {
+  background-color: "#80CC28";
+  border-color: "#80CC28";
+}
+
+
+
+/*Início das configurações da Navigation com dispositivos < 768px*/
+@media screen and (max-width: 768px) {
+  .menu {
+    width: 100%;
+    height: auto;
+    display: block;
+    line-height: 10px;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .menu ul {
+    position: relative;
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0px;
+    -webkit-transition: max-height 0.3s;
+    -moz-transition: max-height 0.3s;
+    -ms-transition: max-height 0.3s;
+    -o-transition: max-height 0.3s;
+    transition: max-height 0.3s;
+  }
+
+  .menu ul a{
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.74);
+    padding: 20px 0px 10px 5%;
+  }
+  .menu ul button{
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    margin: -20px -10px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.74);
+  }
+
+  .menu-icon {
+    width: 100px;
+    height: inherit;
+    display: block;
+    position: absolute;
+    color: #80CC28;
+    top: 0;
+    right: 0;
+    line-height: 60px;
+  }
+
+  #menuToggle:checked~ul {
+    max-height: 350px;
+  }
+
+  .menu-icon i {
+    font-size: 1.7em;
+    padding: 14px;
+    margin: 15px;
+  }
+
+  .content {
+    position: fixed;
+    z-index: -1;
+    margin-top: 30%;
+
+  }
+  .Login-Button.button{
+    width: 100%;
+    background-color: "#80CC28";
+    border-color: "#80CC28";
+  }
+
+}
+
+@media screen and (max-width: 769px) {
+  header{
+    height: 80px;
+    background: rgba(11, 188, 11, 0.13);
+  }
+  .brand{
+    margin-bottom: -10px;
+  }
+  .flex-container{
+    position: relative;
+    z-index: -1;
+    width: 100vw;
+  }
+}
