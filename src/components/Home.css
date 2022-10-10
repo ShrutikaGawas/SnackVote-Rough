@@ -38,7 +38,8 @@ p {
     flex-direction: column-reverse;
     align-items: center;
   }
-  .text-container{
+
+  .text-container {
     width: 80vw;
     padding: 0px;
   }

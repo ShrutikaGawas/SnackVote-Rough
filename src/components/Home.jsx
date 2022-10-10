@@ -3,7 +3,7 @@ import "./Home.css";
 import Bowl from "../assets/Bowl.png";
 import Berries from "../assets/Berries.png";
 
-const Home = () => { 
+const Home = () => {
   return (
     <div className="flex-container">
       <div className="text-container">
@@ -15,7 +15,7 @@ const Home = () => {
           your survival.
         </p>
 
-        <img style={{marginTop:20}} src={Berries} alt="" />
+        <img style={{ marginTop: 20 }} src={Berries} alt="" />
       </div>
       <div className="image-container">
         <img src={Bowl} alt="" />

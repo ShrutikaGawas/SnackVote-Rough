@@ -35,10 +35,12 @@ a {
   text-decoration: none;
   color: black;
 }
+
 li {
   list-style: none;
   font-family: 'Montserrat', sans-serif;
 }
+
 /*Início das configurações da header*/
 header {
   width: 100%;
@@ -46,6 +48,7 @@ header {
   text-align: center;
   font-family: sans-serif;
 }
+
 .brand {
   width: auto;
   height: 100%;
@@ -53,6 +56,7 @@ header {
   margin: 10px 0px;
   padding: 14px 40px;
 }
+
 .menu {
   width: 70%;
   height: 100%;
@@ -81,7 +85,8 @@ header {
   height: inherit;
   display: inline-block;
 }
-ul:first-child{
+
+ul:first-child {
   margin-left: auto;
 }
 
@@ -106,6 +111,7 @@ ul:first-child{
 .menu-icon {
   display: none;
 }
+
 .Login-Button {
   background-color: "#80CC28";
   border-color: "#80CC28";
@@ -138,7 +144,7 @@ ul:first-child{
     transition: max-height 0.3s;
   }
 
-  .menu ul a{
+  .menu ul a {
     text-align: center;
     width: 100%;
     height: 50px;
@@ -146,11 +152,12 @@ ul:first-child{
     background-color: rgba(0, 0, 0, 0.74);
     padding: 20px 0px 10px 5%;
   }
-  .menu ul button{
+
+  .menu ul button {
     text-align: center;
-    width: 100%;
+    width: 110%;
     height: 50px;
-    margin: -20px -10px;
+    margin: -20px -20px;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.74);
   }
@@ -182,7 +189,8 @@ ul:first-child{
     margin-top: 30%;
 
   }
-  .Login-Button.button{
+
+  .Login-Button.button {
     width: 100%;
     background-color: "#80CC28";
     border-color: "#80CC28";
@@ -191,14 +199,16 @@ ul:first-child{
 }
 
 @media screen and (max-width: 769px) {
-  header{
+  header {
     height: 80px;
     background: rgba(11, 188, 11, 0.13);
   }
-  .brand{
+
+  .brand {
     margin-bottom: -10px;
   }
-  .flex-container{
+
+  .flex-container {
     position: relative;
     z-index: -1;
     width: 100vw;
