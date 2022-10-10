@@ -8,10 +8,11 @@ import Admin from "./components/Admin";
 import VoteForm from "./components/VoteForm";
 import Lastpage from "./components/Lastpage";
 import Login from "./components/Login";
+import AuthProvider from "./components/AuthProvider";
 function App() {
   return (
     <>
-      <Router>
+      <AuthProvider>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -23,7 +24,7 @@ function App() {
           <Route path="/Login" element={<Login/>}/>
        
         </Routes>
-      </Router>
+      </AuthProvider>
     </>
   );
 }

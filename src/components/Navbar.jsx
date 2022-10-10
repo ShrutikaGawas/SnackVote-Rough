@@ -1,11 +1,19 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "./AuthProvider";
+import { useNavigate } from "react-router-dom";
 import Logo from "../assets/Logo.svg";
 import { Button } from "antd";
 import "antd/dist/antd.css";
 import "./Navbar.css";
 
 const Navbar = () => {
+  const auth = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    auth.logout();
+    navigate("/");
+  };
   return (
     <header>
       <figure className="brand">
@@ -29,7 +37,7 @@ const Navbar = () => {
         </ul>
 
         <ul>
-          <NavLink className="nav-link" to="/Login">
+          {/* <NavLink className="nav-link" to="/Login">
             <Button
               style={{ backgroundColor: "#80CC28", borderColor: "#80CC28" }}
               type="primary"
@@ -38,7 +46,25 @@ const Navbar = () => {
             >
               Sign In
             </Button>
-          </NavLink>
+          </NavLink> */}
+          {!auth.user ? (
+            <NavLink className="nav-link" to="/Login">
+              <Button
+                style={{ backgroundColor: "#80CC28", borderColor: "#80CC28" }}
+                className="Login-Button"
+              >
+                Login
+              </Button>
+            </NavLink>
+          ) : (
+            <Button
+              style={{ backgroundColor: "#80CC28", borderColor: "#80CC28" }}
+              className="Login-Button"
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
+          )}
         </ul>
       </nav>
     </header>

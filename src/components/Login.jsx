@@ -1,13 +1,36 @@
+import axios from "axios";
+import { useAuth } from "./AuthProvider";
 import deco3 from "../assets/right.png";
 import deco4 from "../assets/left.png";
 import React, { useState } from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import "antd/dist/antd.css";
 import "./login.css";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const auth = useAuth();
+
   const onFinish = (values) => {
-    console.log("Success:", values);
+    console.log(values.username + " " + values.password);
+
+    // axios.post("https://localhost:7018/api/User/login");
+    axios({
+      method: "post",
+      url: "https://localhost:7018/api/User/login",
+      data: {
+        username: values.username,
+        password: values.password,
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem("user", "bearer" + res.data);
+        auth.setLoggedIn("true");
+        navigate("/Menu")
+      })
+      .catch((error) => console.log(error));
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -36,6 +59,11 @@ const Login = () => {
             }}
           />
         </div>
+        {/* <div>
+          <input onChange={(e) => setUserName(e.target.value)} type="text" placeholder="username" />
+          <input onChange={(e) => setUserPass(e.target.value)} type="password" placeholder="password" />
+          <button onClick={handleSubmit}>Submit</button>
+        </div> */}
 
         <Form
           name="basic"
@@ -76,18 +104,6 @@ const Login = () => {
             ]}
           >
             <Input.Password />
-          </Form.Item>
-          <Form.Item
-            label="Role"
-            name="role"
-            rules={[
-              {
-                required: true,
-                message: "Please input your role!",
-              },
-            ]}
-          >
-            <Input />
           </Form.Item>
 
           <Form.Item
