@@ -21,7 +21,7 @@ const Navbar = () => {
           <i className="fa fa-bars"></i>
         </label>
         <ul>
-          {auth && auth.userDetail.userRole=="User"&&(
+          {auth && auth.userDetail.userRole=="user"&&(
           <>
           <NavLink className="nav-link" to="/" end>
             <li>Home</li>
