@@ -30,6 +30,12 @@ const Navbar = () => {
           <NavLink className="nav-link" to="/Status">
             <li>Status</li>
           </NavLink>
+          {/* Admin Section */}
+          {auth.userDetail.userRoles === "Admin" && (
+            <NavLink className="nav-link" to="/Poll">
+              <li>Status</li>
+            </NavLink>
+          )}
         </ul>
 
         <ul>

@@ -3,6 +3,7 @@ import { useAuth } from "./AuthProvider";
 import deco3 from "../assets/right.png";
 import deco4 from "../assets/left.png";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import "antd/dist/antd.css";
 import "./login.css";
@@ -12,7 +13,27 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate();
   const auth = useAuth();
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "https://localhost:7018/api/User/getme",
+      headers:{"Authorization":"bearer "+auth.user}
+    })
+    .then((res)=>{
+      const {userRole} = res.data;
+      auth.setUserDetail(res.data);
+      if(userRole === "Admin"){
+        navigate('/Admin')
+      }
+      else {navigate('/menu')}
 
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }, [auth.user])
+  
+  
   const onFinish = (values) => {
     console.log(values.username + " " + values.password);
 
@@ -26,10 +47,9 @@ const Login = () => {
     })
       .then((res) => {
         console.log(res.data);
-        localStorage.setItem("user", "bearer" + res.data);
+        localStorage.setItem("user", "bearer " + res.data);
         auth.setLoggedIn("true");
         auth.setUser(res.data);
-        navigate("/Menu");
       })
       .catch((error) => console.log(error));
   };
