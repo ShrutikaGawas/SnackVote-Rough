@@ -23,9 +23,11 @@ const Login = () => {
       const {userRole} = res.data;
       auth.setUserDetail(res.data);
       if(userRole === "Admin"){
-        navigate('/Admin')
+        console.log(res.data)
+        // navigate('/Admin')
       }
       else {navigate('/menu')}
+      
 
     })
     .catch((err)=>{
@@ -47,8 +49,8 @@ const Login = () => {
     })
       .then((res) => {
         console.log(res.data);
-        localStorage.setItem("user", "bearer " + res.data);
-        auth.setLoggedIn("true");
+        localStorage.setItem("user", res.data);
+        auth.setLoggedIn(true);
         auth.setUser(res.data);
       })
       .catch((error) => console.log(error));
