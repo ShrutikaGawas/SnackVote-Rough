@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import "antd/dist/antd.css";
 import "./login.css";
+import jwt from 'jwt-decode';
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -15,7 +16,6 @@ const Login = () => {
   const onFinish = (values) => {
     console.log(values.username + " " + values.password);
 
-    // axios.post("https://localhost:7018/api/User/login");
     axios({
       method: "post",
       url: "https://localhost:7018/api/User/login",
@@ -28,6 +28,7 @@ const Login = () => {
         console.log(res.data);
         localStorage.setItem("user", "bearer" + res.data);
         auth.setLoggedIn("true");
+        auth.setUser(res.data);
         navigate("/Menu");
       })
       .catch((error) => console.log(error));

@@ -2,8 +2,11 @@ import React from "react";
 import "./Home.css";
 import Bowl from "../assets/Bowl.png";
 import Berries from "../assets/Berries.png";
+import { useAuth } from "./AuthProvider";
 
 const Home = () => {
+  const auth = useAuth()
+
   return (
     <div className="flex-container">
       <div className="text-container">

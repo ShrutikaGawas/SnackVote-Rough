@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { createContext, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import jwt from 'jwt-decode';
+
 const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [user,setUser] = useState("")
 
   const navigate = useNavigate();
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
     if (loggedInUser) {
-      setLoggedIn("true");
+      setLoggedIn(true);
+      setUser(loggedInUser);
+      navigate("/");
     } else navigate("/Login");
-  }, []);
+  },[]);
 
   const logout = () => {
     setLoggedIn(false);
@@ -20,7 +25,7 @@ const AuthProvider = ({ children }) => {
   };
   
   return (
-    <AuthContext.Provider value={{ loggedIn, setLoggedIn, logout }}>
+    <AuthContext.Provider value={{ loggedIn, setLoggedIn, logout,setUser,user }}>
       {children}
     </AuthContext.Provider>
   );

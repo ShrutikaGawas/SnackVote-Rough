@@ -11,8 +11,12 @@ import pic2 from "../assets/img3.png";
 import pic3 from "../assets/img4.png";
 import pic4 from "../assets/img5.png";
 import pic5 from "../assets/img6.png";
-
+import { useEffect } from "react";
 const Menu = () => {
+  // Retrive Menu Items
+  // useEffect(() => {
+  // }, [])
+
   return (
     <div className="bar">
       <div className="menu-flexbox">
