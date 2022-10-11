@@ -9,17 +9,16 @@ import { Form, Input, Button, Radio, DatePicker, Upload } from "antd";
 import VoteForm from "./VoteForm";
 import Lastpage from "./Lastpage";
 
-
 const { TextArea } = Input;
 
-const Admin = () =>{
+const Admin = () => {
   const [componentDisabled, setComponentDisabled] = useState(true);
   const onFormLayoutChange = ({ disabled }) => {
     setComponentDisabled(disabled);
   };
 
   return (
-    <div >
+    <div>
       <div className="admin-flexbox">
         <img
           src={left}
@@ -38,11 +37,10 @@ const Admin = () =>{
           className="admin-image"
         />
       </div>
-      <VoteForm/>
+      <VoteForm />
       <br />
       {/* <Lastpage/> */}
-
     </div>
   );
-}
+};
 export default Admin;

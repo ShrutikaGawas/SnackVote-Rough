@@ -9,6 +9,7 @@ import VoteForm from "./components/VoteForm";
 import Lastpage from "./components/Lastpage";
 import Login from "./components/Login";
 import AuthProvider from "./components/AuthProvider";
+import RequireAuth from "./components/RequireAuth";
 function App() {
   return (
     <>
@@ -16,13 +17,26 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Menu" element={<Menu />} />
-          <Route path="/Status" element={<Status />} />
-          <Route path="/Admin" element={<Admin/>}/>
-          <Route path="/Form" element={<VoteForm/>}/>
-          <Route path="/Poll" element={<Lastpage/>}/>
-          <Route path="/Login" element={<Login/>}/>
-       
+          <Route
+            path="/Menu"
+            element={
+              <RequireAuth>
+                <Menu />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/Status"
+            element={
+              <RequireAuth>
+                <Status />
+              </RequireAuth>
+            }
+          />
+          <Route path="/Admin" element={<Admin />} />
+          <Route path="/Form" element={<VoteForm />} />
+          <Route path="/Poll" element={<Lastpage />} />
+          <Route path="/Login" element={<Login />} />
         </Routes>
       </AuthProvider>
     </>

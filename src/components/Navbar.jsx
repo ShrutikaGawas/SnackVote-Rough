@@ -9,11 +9,7 @@ import "./Navbar.css";
 
 const Navbar = () => {
   const auth = useAuth();
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    auth.logout();
-    navigate("/");
-  };
+
   return (
     <header>
       <figure className="brand">
@@ -37,17 +33,7 @@ const Navbar = () => {
         </ul>
 
         <ul>
-          {/* <NavLink className="nav-link" to="/Login">
-            <Button
-              style={{ backgroundColor: "#80CC28", borderColor: "#80CC28" }}
-              type="primary"
-              size="medium"
-              className="Login-Button"
-            >
-              Sign In
-            </Button>
-          </NavLink> */}
-          {!auth.user ? (
+          {!auth.loggedIn && (
             <NavLink className="nav-link" to="/Login">
               <Button
                 style={{ backgroundColor: "#80CC28", borderColor: "#80CC28" }}
@@ -56,11 +42,12 @@ const Navbar = () => {
                 Login
               </Button>
             </NavLink>
-          ) : (
+          )}
+          {auth.loggedIn && (
             <Button
               style={{ backgroundColor: "#80CC28", borderColor: "#80CC28" }}
               className="Login-Button"
-              onClick={handleLogout}
+              onClick={auth.logout}
             >
               Logout
             </Button>

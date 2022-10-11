@@ -18,7 +18,6 @@ const VoteForm = () => {
 
   return (
     <div className="border">
-      
       <div className="form-header">
         <div className="form-name">
           <img src={deco4} style={{ width: "100px", height: "100px" }} />

@@ -28,7 +28,7 @@ const Login = () => {
         console.log(res.data);
         localStorage.setItem("user", "bearer" + res.data);
         auth.setLoggedIn("true");
-        navigate("/Menu")
+        navigate("/Menu");
       })
       .catch((error) => console.log(error));
   };
@@ -59,11 +59,6 @@ const Login = () => {
             }}
           />
         </div>
-        {/* <div>
-          <input onChange={(e) => setUserName(e.target.value)} type="text" placeholder="username" />
-          <input onChange={(e) => setUserPass(e.target.value)} type="password" placeholder="password" />
-          <button onClick={handleSubmit}>Submit</button>
-        </div> */}
 
         <Form
           name="basic"
