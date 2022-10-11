@@ -24,7 +24,7 @@ const Login = () => {
       auth.setUserDetail(res.data);
       if(userRole === "Admin"){
         console.log(res.data)
-        // navigate('/Admin')
+        navigate('/Admin')
       }
       else {navigate('/menu')}
       

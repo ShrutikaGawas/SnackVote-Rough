@@ -8,10 +8,12 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Form, Input, Button, Radio, DatePicker, Upload } from "antd";
 import VoteForm from "./VoteForm";
 import Lastpage from "./Lastpage";
+import axios from "axios";
 
 const { TextArea } = Input;
 
 const Admin = () => {
+
   const [componentDisabled, setComponentDisabled] = useState(true);
   const onFormLayoutChange = ({ disabled }) => {
     setComponentDisabled(disabled);

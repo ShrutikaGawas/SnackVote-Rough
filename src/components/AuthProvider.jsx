@@ -18,7 +18,25 @@ const AuthProvider = ({ children }) => {
     if (loggedInUser) { 
       setLoggedIn(true);
       setUser(loggedInUser);
-      navigate("/");
+      if(userDetail.length > 0)
+      {
+        return;
+      }
+        axios({
+        method: 'get',
+        url: "https://localhost:7018/api/User/getme",
+        headers:{"Authorization":"bearer "+loggedInUser}
+      }).then((res)=>{
+        if(res)
+        {
+          setUserDetail(res.data);
+          return;
+        }
+        setLoggedIn(false);
+        setUser(); 
+        navigate("/Login");
+      }   
+      );
     } else navigate("/Login");
   }, []);
 
@@ -39,6 +57,7 @@ const AuthProvider = ({ children }) => {
     userDetail,
     setUserDetail,
   };
+
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };
 
