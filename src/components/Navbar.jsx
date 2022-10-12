@@ -45,8 +45,6 @@ const Navbar = () => {
           </>)}
           </ul>
           {/* Admin Section */}
-          
-        
 
         <ul>
           {auth &&!auth.loggedIn && (
