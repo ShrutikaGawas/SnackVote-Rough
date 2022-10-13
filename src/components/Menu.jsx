@@ -17,6 +17,8 @@ import axios from "axios";
 const Menu = () => {
   // Retrive Menu Items
   const auth = useAuth();
+  const { userRole } = auth.userDetail;
+
   const [menuItems, setMenuItems] = useState([]);
   useEffect(() => {
     console.log(auth.userDetail);
@@ -43,12 +45,36 @@ const Menu = () => {
         headers: { Authorization: "bearer " + auth.user },
       })
         .then((res) => {
+          location.reload();
           console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
         });
     } else window.alert("Already Voted!");
+  };
+
+  const handleDelete = (e) => {
+    const deleteId = e.target.value;
+    console.log(deleteId);
+    // setMenuItems(([...items]) => {
+    //   items.filter((item) => item.id != deleteId);
+    //   return items;
+    // });
+    console.log(menuItems);
+
+    axios({
+      method: "delete",
+      url: "https://localhost:7018/api/Menu/deleteItem?id=" + deleteId,
+      headers: { Authorization: "bearer " + auth.user },
+    })
+      .then((res) => {
+        location.reload();
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -63,30 +89,6 @@ const Menu = () => {
         <div className="menu-middle">
           <h2>Today's Menu</h2>
           <p>Check out the Menu and Vote</p>
-          <div className="menu-button-flex">
-            <Button
-              style={{
-                backgroundColor: "#80CC28",
-                borderColor: "#80CC28",
-                margin: "0px 20px",
-              }}
-              type="primary"
-              size="medium"
-            >
-              Veg
-            </Button>
-            <Button
-              style={{
-                backgroundColor: "#e13020",
-                borderColor: "#e13020",
-                margin: "0px 20px",
-              }}
-              type="primary"
-              size="medium"
-            >
-              Non-Veg
-            </Button>
-          </div>
         </div>
         <img
           src={right}
@@ -109,9 +111,15 @@ const Menu = () => {
             >
               <Meta title={item.name} description={item.description} />
               <div className="click">
-                <button name={item.name} onClick={handleVote}>
-                  Vote
-                </button>
+                {userRole != "Admin" ? (
+                  <button name={item.name} onClick={handleVote}>
+                    Vote
+                  </button>
+                ) : (
+                  <button value={item.id} onClick={handleDelete}>
+                    Delete
+                  </button>
+                )}
               </div>
             </Card>
           ))}

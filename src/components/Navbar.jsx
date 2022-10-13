@@ -22,29 +22,22 @@ const Navbar = () => {
           <i className="fa fa-bars"></i>
         </label>
         <ul>
-          {userRole == "User" && (
-            <>
-              <NavLink className="nav-link" to="/" end>
-                <li>Home</li>
-              </NavLink>
-              <NavLink className="nav-link" to="/Menu">
-                <li>Menu</li>
-              </NavLink>
-              <NavLink className="nav-link" to="/Status">
-                <li>Status</li>
-              </NavLink>
-            </>
-          )}
-          {userRole == "Admin" && (
-            <>
-              <NavLink className="nav-link" to="/Admin">
+          <>
+            <NavLink className="nav-link" to="/" end>
+              <li>Home</li>
+            </NavLink>
+            {userRole == "Admin" && (
+              <NavLink className="nav-link" to="/Admin" end>
                 <li>Admin</li>
               </NavLink>
-              <NavLink className="nav-link" to="/Poll">
-                <li>Polls</li>
-              </NavLink>
-            </>
-          )}
+            )}
+            <NavLink className="nav-link" to="/Menu">
+              <li>Menu</li>
+            </NavLink>
+            <NavLink className="nav-link" to="/Status">
+              <li>Status</li>
+            </NavLink>
+          </>
         </ul>
         {/* Admin Section */}
 

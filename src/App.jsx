@@ -6,7 +6,7 @@ import Menu from "./components/Menu";
 import Status from "./components/Status";
 import Admin from "./components/Admin";
 import VoteForm from "./components/VoteForm";
-import Lastpage from "./components/Lastpage";
+import MenuItems from "./components/MenuItems";
 import Login from "./components/Login";
 import AuthProvider from "./components/AuthProvider";
 import RequireAuth from "./components/RequireAuth";
@@ -35,7 +35,7 @@ function App() {
           />
           <Route path="/Admin" element={<Admin />} />
           <Route path="/Form" element={<VoteForm />} />
-          <Route path="/Poll" element={<Lastpage />} />
+          <Route path="/MenuItems" element={<MenuItems />} />
           <Route path="/Login" element={<Login />} />
         </Routes>
       </AuthProvider>
