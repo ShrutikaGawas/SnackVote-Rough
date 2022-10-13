@@ -9,14 +9,16 @@ import deco3 from "../assets/right.png";
 import deco4 from "../assets/left.png";
 import { PlusOutlined } from "@ant-design/icons";
 import { Form, Input, Button, Radio, DatePicker, Upload } from "antd";
-import Lastpage from "./Lastpage";
+import Lastpage from "./MenuItems";
+import { Navigate, useNavigate } from "react-router-dom";
 const { TextArea } = Input;
 
 const VoteForm = () => {
-  
+  const [form] = Form.useForm();
   const auth = useAuth();
+  const navigate = useNavigate();
   const [componentDisabled, setComponentDisabled] = useState(true);
-  const [imageFile,setImageFile] = useState([]);
+  const [imageFile, setImageFile] = useState([]);
 
   const onFormLayoutChange = ({ disabled }) => {
     setComponentDisabled(disabled);
@@ -26,14 +28,14 @@ const VoteForm = () => {
       onSuccess("ok");
     }, 0);
   };
-  const imageUploadProps = { 
+  const imageUploadProps = {
     multiple: false,
     maxCount: 1,
     customRequest: dummyRequest,
     onChange(info) {
       const { status } = info.file;
-      console.log("status=",status);
-      /converting to base 64/
+      console.log("status=", status);
+      /converting to base 64/;
       if (status === "done") {
         const file = info.file.originFileObj;
         setImageFile(file);
@@ -46,8 +48,17 @@ const VoteForm = () => {
     },
   };
   const onFinish = (values) => {
-    console.log(values.dishname + " " + values.description+ " " + values.category+ " "+values.image);
+    console.log(
+      values.dishname +
+        " " +
+        values.description +
+        " " +
+        values.category +
+        " " +
+        values.image
+    );
     let formData = new FormData();
+    form.resetFields();
     formData.append("name", values.dishname);
     formData.append("description", values.description);
     formData.append("category", values.category);
@@ -56,14 +67,12 @@ const VoteForm = () => {
     axios({
       method: "post",
       url: "https://localhost:7018/api/Menu/additem",
-      headers:{"Authorization":"bearer "+localStorage.getItem('user')},
+      headers: { Authorization: "bearer " + auth.user },
       data: formData,
     })
       .then((res) => {
         console.log(res.data);
-        localStorage.setItem("user", res.data);
-        auth.setLoggedIn(true);
-        auth.setUser(res.data);
+        window.alert("Added Menu Item");
       })
       .catch((error) => console.log(error));
   };
@@ -77,7 +86,7 @@ const VoteForm = () => {
           <img src={deco3} style={{ width: "100px", height: "100px" }} />
         </div>
         <Form
-        name="basic"
+          name="basic"
           labelCol={{
             span: 4,
           }}
@@ -88,6 +97,7 @@ const VoteForm = () => {
           onFinish={onFinish}
           onValuesChange={onFormLayoutChange}
           disabled={false}
+          form={form}
         >
           <Form.Item label="Dishname" name="dishname">
             <Input />
@@ -115,7 +125,10 @@ const VoteForm = () => {
             </Upload>
           </Form.Item>
           <Form.Item label="">
-            <Button style={{ backgroundColor: "red", color: "white" }} htmlType="submit">
+            <Button
+              style={{ backgroundColor: "red", color: "white" }}
+              htmlType="submit"
+            >
               ADD
             </Button>
           </Form.Item>

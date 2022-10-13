@@ -5,7 +5,7 @@ import Berries from "../assets/Berries.png";
 import { useAuth } from "./AuthProvider";
 
 const Home = () => {
-  const auth = useAuth()
+  const auth = useAuth();
 
   return (
     <div className="flex-container">
