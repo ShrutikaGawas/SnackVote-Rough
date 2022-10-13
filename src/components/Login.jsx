@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import "antd/dist/antd.css";
 import "./login.css";
-import jwt from 'jwt-decode';
+import jwt from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -17,25 +17,23 @@ const Login = () => {
     axios({
       method: "get",
       url: "https://localhost:7018/api/User/getme",
-      headers:{"Authorization":"bearer "+auth.user}
+      headers: { Authorization: "bearer " + auth.user },
     })
-    .then((res)=>{
-      const {userRole} = res.data;
-      auth.setUserDetail(res.data);
-      if(userRole === "Admin"){
-        console.log(res.data)
-        navigate('/Admin')
-      }
-      else {navigate('/menu')}
-      
+      .then((res) => {
+        const { userRole } = res.data;
+        auth.setUserDetail(res.data);
+        if (userRole === "Admin") {
+          console.log(res.data);
+          navigate("/Admin");
+        } else {
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [auth.user]);
 
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-  }, [auth.user])
-  
-  
   const onFinish = (values) => {
     console.log(values.username + " " + values.password);
 

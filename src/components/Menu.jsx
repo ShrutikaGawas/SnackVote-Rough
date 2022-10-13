@@ -11,11 +11,45 @@ import pic2 from "../assets/img3.png";
 import pic3 from "../assets/img4.png";
 import pic4 from "../assets/img5.png";
 import pic5 from "../assets/img6.png";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "./AuthProvider";
+import axios from "axios";
 const Menu = () => {
   // Retrive Menu Items
-  // useEffect(() => {
-  // }, [])
+  const auth = useAuth();
+  const [menuItems, setMenuItems] = useState([]);
+  useEffect(() => {
+    console.log(auth.userDetail);
+    axios({
+      method: "get",
+      url: "https://localhost:7018/api/Menu/getitems",
+      headers: { Authorization: "bearer " + auth.user },
+    })
+      .then((res) => {
+        console.log(res.data);
+        setMenuItems(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  const handleVote = (e) => {
+    const vote = e.target.name;
+    const { hasVoted } = auth.userDetail;
+    if (!hasVoted) {
+      axios({
+        method: "post",
+        url: "https://localhost:7018/api/Vote/addvote?vote_item=" + vote,
+        headers: { Authorization: "bearer " + auth.user },
+      })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else window.alert("Already Voted!");
+  };
 
   return (
     <div className="bar">
@@ -64,115 +98,23 @@ const Menu = () => {
 
       <div className="align">
         <div className="top">
-          <Card
-            hoverable
-            style={{
-              width: 223,
-            }}
-            cover={<img alt="example" src={pic4} />}
-          >
-            <Meta
-              title="Blue Beery Pancake"
-              description="This is Blue Beery Pancake"
-            />
-            <div className="click">
-              <Button  type="primary" size="medium">
-                Vote
-              </Button>
-            </div>
-          </Card>
-
-          <Card
-            hoverable
-            style={{
-              width: 240,
-            }}
-            cover={<img alt="example" src={pic3} />}
-          >
-            <Meta
-              title="Sunny side eggs"
-              description="Sunny eggs on toasted bread"
-            />
-            <div className="click">
-              <Button type="primary" size="medium">
-                Vote
-              </Button>
-            </div>
-          </Card>
-
-          <Card
-            hoverable
-            style={{
-              width: 255,
-            }}
-            cover={<img alt="example" src={pic2} />}
-          >
-            <Meta
-              title="cheesy omellete"
-              description="Omellete filled with veggies"
-            />
-            <div className="click">
-              <Button type="primary" size="medium">
-                Vote
-              </Button>
-            </div>
-          </Card>
-        </div>
-
-        <div className="bottom">
-          <Card
-            hoverable
-            style={{
-              width: 240,
-            }}
-            cover={<img alt="example" src={pic1} />}
-          >
-            <Meta
-              title="Tasty Fruity Cereal"
-              description="Filled with oats and dry fruits"
-            />
-            <div className="click">
-              <Button type="primary" size="medium">
-                Vote
-              </Button>
-            </div>
-          </Card>
-
-          <Card
-            hoverable
-            style={{
-              width: 240,
-            }}
-            cover={<img alt="example" src={pic5} />}
-          >
-            <Meta
-              title="Healthy salad"
-              description="Tasty crunchy vegatable salad"
-            />
-            <div className="click">
-              <Button type="primary" size="medium">
-                Vote
-              </Button>
-            </div>
-          </Card>
-
-          <Card
-            hoverable
-            style={{
-              width: 233,
-            }}
-            cover={<img alt="example" src={pic4} />}
-          >
-            <Meta
-              title="Blue Beery Pancake"
-              description="This is Blue Beery Pancake"
-            />
-            <div className="click">
-              <Button type="primary" size="medium">
-                Vote
-              </Button>
-            </div>
-          </Card>
+          {menuItems.map((item, index) => (
+            <Card
+              key={index}
+              hoverable
+              style={{
+                width: 223,
+              }}
+              cover={<img alt="example" src={item.image} />}
+            >
+              <Meta title={item.name} description={item.description} />
+              <div className="click">
+                <button name={item.name} onClick={handleVote}>
+                  Vote
+                </button>
+              </div>
+            </Card>
+          ))}
         </div>
       </div>
     </div>
