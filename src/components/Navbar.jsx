@@ -9,7 +9,8 @@ import "./Navbar.css";
 
 const Navbar = () => {
   const auth = useAuth();
-  console.log("navbar : ", auth);
+  const { userRole } = auth.userDetail;
+  // console.log("navbar : ", auth);
   return (
     <header>
       <figure className="brand">
@@ -21,33 +22,34 @@ const Navbar = () => {
           <i className="fa fa-bars"></i>
         </label>
         <ul>
-          {auth && auth.userDetail.userRole=="user"&&(
-          <>
-          <NavLink className="nav-link" to="/" end>
-            <li>Home</li>
-          </NavLink>
-          <NavLink className="nav-link" to="/Menu">
-            <li>Menu</li>
-          </NavLink>
-          <NavLink className="nav-link" to="/Status">
-            <li>Status</li>
-          </NavLink>
-          </>
+          {userRole == "User" && (
+            <>
+              <NavLink className="nav-link" to="/" end>
+                <li>Home</li>
+              </NavLink>
+              <NavLink className="nav-link" to="/Menu">
+                <li>Menu</li>
+              </NavLink>
+              <NavLink className="nav-link" to="/Status">
+                <li>Status</li>
+              </NavLink>
+            </>
           )}
-         {auth && auth.userDetail.userRole=="Admin" &&(
-          <>
-          <NavLink className="nav-link" to="/Admin">
-            <li>Admin</li>
-          </NavLink>
-          <NavLink className="nav-link" to="/Poll">
-            <li>Polls</li>
-          </NavLink>
-          </>)}
-          </ul>
-          {/* Admin Section */}
+          {userRole == "Admin" && (
+            <>
+              <NavLink className="nav-link" to="/Admin">
+                <li>Admin</li>
+              </NavLink>
+              <NavLink className="nav-link" to="/Poll">
+                <li>Polls</li>
+              </NavLink>
+            </>
+          )}
+        </ul>
+        {/* Admin Section */}
 
         <ul>
-          {auth &&!auth.loggedIn && (
+          {/* {!auth.loggedIn && (
             <NavLink className="nav-link" to="/Login">
               <Button
                 style={{ backgroundColor: "#80CC28", borderColor: "#80CC28" }}
@@ -56,7 +58,7 @@ const Navbar = () => {
                 Login
               </Button>
             </NavLink>
-          )}
+          )} */}
           {auth && auth.loggedIn && (
             <Button
               style={{ backgroundColor: "#80CC28", borderColor: "#80CC28" }}
